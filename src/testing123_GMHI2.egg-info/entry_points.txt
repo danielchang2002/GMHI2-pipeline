@@ -1,3 +1,0 @@
-[console_scripts]
-GMHI2 = GMHI2.__main__:main
-
