@@ -127,9 +127,26 @@ def check_GRCh38_noalt_as():
     return correct
 
 
+def check_clade_markers():
+    print("clade markers")
+    subprocess.call(
+        [
+            "metaphlan",
+            "--install",
+            "--index",
+            "mpa_v30_CHOCOPhlAn_201901",
+            "--bowtie2db",
+            os.path.join(utils.DEFAULT_DB_FOLDER, "clade_markers"),
+        ]
+    )
+    print_check_message(True)
+
+
 def check_and_install_databases():
     print("-" * 5, "Database checks and/or installation", "-" * 5)
-    if not check_GRCh38_noalt_as():
-        install_databases.install_GRCh38_noalt_as()
+    # if not check_GRCh38_noalt_as():
+    #     install_databases.install_GRCh38_noalt_as()
+    # check_GRCh38_noalt_as()
     check_GRCh38_noalt_as()
+    check_clade_markers()
     print("-" * 5, "Database checks done", "-" * 5, "\n")
