@@ -6,7 +6,7 @@ gmhi2_script_install_folder = os.path.dirname(os.path.abspath(__file__))
 # get the default database folder
 DEFAULT_DB_FOLDER = os.path.join(gmhi2_script_install_folder, "gmhi2_databases")
 
-def tests():
+def dev_tests():
     # proc = subprocess.Popen(["cat", os.path.join(DEFAULT_DB_FOLDER, "TruSeq3-PE.fa")], 
     #         stdout=subprocess.PIPE)
     # output = proc.stdout.read().decode('ASCII')
@@ -60,10 +60,17 @@ def tests():
 
     print("-" * 5, "Database checks", "-" * 5)
 
-
+    print("GRCh38_noalt_as")
+    proc = subprocess.Popen(["md5sum", "-c", "gmhi2_databases/GRCh38_noalt_as.chk"], stdout=subprocess.PIPE)
+    output = proc.stdout.read().decode('ASCII')
+    print(output)
+    print([line[-2:] for line in output.split("\n")])
+    correct = [line[-2:] == "OK" or line[-2:] == "" for line in output.split("\n")]
+    correct = all(correct)
+    print("Correct:", correct)
 
 def main():
-    tests()
+    dev_tests()
 
 if __name__ == "__main__":
     main()
