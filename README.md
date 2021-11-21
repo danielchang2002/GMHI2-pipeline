@@ -1,5 +1,10 @@
-# Example Package
+# GMHI2
 
-This is a simple example package. You can use
-[Github-flavored Markdown](https://guides.github.com/features/mastering-markdown/)
-to write your content.
+Python script for GMHI2 pipeline
+
+### Installation
+
+1. Install via conda
+```sh
+conda install GMHI2
+```
