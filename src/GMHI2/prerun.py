@@ -1,6 +1,8 @@
 import subprocess
 import os
 from . import utils
+from . import install_databases
+import traceback
 
 
 class bcolors:
@@ -40,17 +42,20 @@ def check_tool(tool):
     flag = "--version" if not tool == "trimmomatic" else "-version"
 
     try:
+        proc = subprocess.Popen(
+            [tool, flag], stdout=subprocess.PIPE, stderr=subprocess.PIPE
+        )
         if not tool == "repair.sh":
-            proc = subprocess.Popen([tool, flag], stdout=subprocess.PIPE)
             output = proc.stdout.read().decode("ASCII")
         else:
-            proc = subprocess.Popen(["repair.sh", "--version"], stderr=subprocess.PIPE)
             output = proc.stderr.read().decode("ASCII")
         correct = gt in output
     except:
         correct = False
     print_check_message(correct)
     if not correct:
+        if tool == "repair.sh":
+            tool = "bbmap"
         print(bcolors.WARNING + tool, "not found on path or wrong version")
         print(
             'please run: "conda install -c bioconda',
@@ -79,7 +84,7 @@ def check_versions():
         )
     else:
         print(
-            bcolors.GREEN,
+            bcolors.OKGREEN,
             "All dependencies up to date",
             bcolors.ENDC,
         )
@@ -87,29 +92,44 @@ def check_versions():
     return not any_failed
 
 
-def check_and_install_databases():
-    print("-" * 5, "Database checks", "-" * 5)
+import hashlib
+
+hashes = {
+    "GRCh38_noalt_as.1.bt2": "a4841a0b52b76812ab5a00b7d390111d",
+    "GRCh38_noalt_as.2.bt2": "56c4081853880066a4de5d74e559434c",
+    "GRCh38_noalt_as.3.bt2": "b2d325b6836d0e957c349d3557b5a743",
+    "GRCh38_noalt_as.4.bt2": "aee1363daba2b49637417b9213281591",
+    "GRCh38_noalt_as.rev.1.bt2": "190f2ba81e148b298fb00129f6653a8a",
+    "GRCh38_noalt_as.rev.2.bt2": "57080fad22f8ff849639433b20f45ec3",
+}
+
+
+def check_GRCh38_noalt_as():
     database = "GRCh38_noalt_as"
     print(database)
+    correct = True
     try:
-        proc = subprocess.Popen(
-            [
-                "md5sum",
-                "-c",
-                os.path.join(utils.DEFAULT_DB_FOLDER, "GRCh38_noalt_as.chk"),
-            ],
-            stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE,
-        )
-        output = proc.stdout.read().decode("ASCII")
-        print(output[:-1])
-        correct = [line[-2:] == "OK" or line[-2:] == "" for line in output.split("\n")]
-        correct = all(correct)
-    except:
+        for file in hashes:
+            h = hashlib.md5(
+                open(os.path.join(utils.DEFAULT_DB_FOLDER, database, file), "rb").read()
+            ).hexdigest()
+            gt = hashes[file]
+            if h != gt:
+                correct = False
+    except Exception:
+        # print(traceback.format_exc())
         correct = False
     print_check_message(correct)
     if not correct:
         print(
             bcolors.WARNING, database, "database not found or corrupted", bcolors.ENDC
         )
+    return correct
+
+
+def check_and_install_databases():
+    print("-" * 5, "Database checks and/or installation", "-" * 5)
+    if not check_GRCh38_noalt_as():
+        install_databases.install_GRCh38_noalt_as()
+    check_GRCh38_noalt_as()
     print("-" * 5, "Database checks done", "-" * 5, "\n")
