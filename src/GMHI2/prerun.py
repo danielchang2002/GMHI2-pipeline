@@ -1,5 +1,6 @@
 import subprocess
 import os
+from . import utils
 
 
 class bcolors:
@@ -50,44 +51,65 @@ def check_tool(tool):
         correct = False
     print_check_message(correct)
     if not correct:
+        print(bcolors.WARNING + tool, "not found on path or wrong version")
         print(
-            bcolors.WARNING + tool,
-            'not found on path or wrong version, please run: "conda install -c bioconda',
+            'please run: "conda install -c bioconda',
             tool + "=" + gt + '"',
             bcolors.ENDC,
         )
+    print()
+    return correct
 
 
 def check_versions():
+    print(
+        "-" * 5,
+        "Version checks",
+        "-" * 5,
+    )
+    any_failed = False
     for tool in version_dict:
-        check_tool(tool)
+        if not check_tool(tool):
+            any_failed = True
+    if any_failed:
+        print(
+            bcolors.FAIL,
+            "Please (re)install dependencies with above instructions and rerun",
+            bcolors.ENDC,
+        )
+    else:
+        print(
+            bcolors.GREEN,
+            "All dependencies up to date",
+            bcolors.ENDC,
+        )
+    print("-" * 5, "Version checks done", "-" * 5, "\n")
+    return not any_failed
 
 
-def check_databases():
-
-    print("Checking GRCh38_noalt_as")
+def check_and_install_databases():
+    print("-" * 5, "Database checks", "-" * 5)
+    database = "GRCh38_noalt_as"
+    print(database)
     try:
         proc = subprocess.Popen(
-            ["md5sum", "-c", "gmhi2_databases/GRCh38_noalt_as.chk"],
+            [
+                "md5sum",
+                "-c",
+                os.path.join(utils.DEFAULT_DB_FOLDER, "GRCh38_noalt_as.chk"),
+            ],
             stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
         )
         output = proc.stdout.read().decode("ASCII")
-        print(output)
+        print(output[:-1])
         correct = [line[-2:] == "OK" or line[-2:] == "" for line in output.split("\n")]
         correct = all(correct)
     except:
-        print("Error with gRCh38_noalt_as database")
+        correct = False
     print_check_message(correct)
-
-
-def checks():
-    print("Testing Dependencies", "\n")
-
-    print("-" * 5, "Version checks", "-" * 5)
-    check_versions()
-    print("-" * 5, "Version checks done", "-" * 5, "\n")
-    return
-
-    print("-" * 5, "Database checks", "-" * 5)
-    check_databases()
+    if not correct:
+        print(
+            bcolors.WARNING, database, "database not found or corrupted", bcolors.ENDC
+        )
     print("-" * 5, "Database checks done", "-" * 5, "\n")
