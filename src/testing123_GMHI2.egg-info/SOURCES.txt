@@ -1,0 +1,14 @@
+LICENSE
+README.md
+pyproject.toml
+setup.py
+src/GMHI2/__init__.py
+src/GMHI2/__main__.py
+src/GMHI2/example.py
+src/GMHI2/gmhi2_databases/TruSeq3-PE.fa
+src/testing123_GMHI2.egg-info/PKG-INFO
+src/testing123_GMHI2.egg-info/SOURCES.txt
+src/testing123_GMHI2.egg-info/dependency_links.txt
+src/testing123_GMHI2.egg-info/entry_points.txt
+src/testing123_GMHI2.egg-info/requires.txt
+src/testing123_GMHI2.egg-info/top_level.txt
