@@ -23,9 +23,6 @@ setuptools.setup(
     package_dir={"": "src"},
     packages=setuptools.find_packages(where="src"),
     python_requires=">=3.7",
-    entry_points={"console_scripts": ["GMHI2=GMHI2.GMHI2:main"]},
-    package_data = { 'GMHI2' : [
-        'gmhi2_databases/*'
-    ]},
-    # install_requires = ['metaphlan'],
+    entry_points={"console_scripts": ["GMHI2=GMHI2.__main__:main"]},
+    package_data={"GMHI2": ["gmhi2_databases/*"]},
 )
