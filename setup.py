@@ -4,7 +4,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
     long_description = fh.read()
 
 setuptools.setup(
-    name="testing123-GMHI2",
+    name="testing1234-GMHI2",
     version="0.0.1",
     author="Daniel Chang",
     author_email="danielchang2002@gmail.com",
