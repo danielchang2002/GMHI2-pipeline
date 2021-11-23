@@ -19,12 +19,12 @@ install gmhi2
 
 1. Install via conda
 ```sh
-$ conda create --name gmhi2_env -c danielchang2002 python=3.7 gmhi2
+conda create --name gmhi2_env -c danielchang2002 python=3.7 gmhi2
 ```
 
 2. Activate environment
 ```sh
-$ conda activate gmhi2_env
+conda activate gmhi2_env
 ```
 
 ### Usage
@@ -68,7 +68,7 @@ Directory structure:
 
 Command:
 ```sh
-$ gmhi2 --fastq1 metagenome1.fastq --fastq2 metagenome2.fastq -o GMHI2.txt
+gmhi2 --fastq1 metagenome1.fastq --fastq2 metagenome2.fastq -o GMHI2.txt
 ```
 
 Result:
