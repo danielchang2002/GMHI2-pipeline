@@ -155,7 +155,7 @@ def remove_intermediate():
         "QC_2U.fastq.gz",
         # "SRR6468520.srarp_1.fastq",
         # "SRR6468520.srarp_2.fastq",
-        "abundance.txt",
+        # "abundance.txt",
         "adapter1.txt",
         "adapter2.txt",
         "adapters.txt",
@@ -182,7 +182,7 @@ def remove_intermediate():
         # "test.ipynb",
         # "test.py",
     ]
-    cmd = ["rm"] + to_remove
+    cmd = ["rm", "-rf"] + to_remove
     subprocess.call(cmd)
 
 
