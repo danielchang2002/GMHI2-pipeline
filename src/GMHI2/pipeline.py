@@ -135,9 +135,56 @@ def profile_metagenome():
     path = os.path.join(utils.DEFAULT_DB_FOLDER, "species_only.sh")
     subprocess.call([path])
 
-def health_index():
-    score = predict_health.score()
+def health_index(args):
+    print("calculating health index")
+    score = predict_health.get_score()
     print("GMHI2 score:", score)
+    try:
+        f = args.output
+        with open(f, 'w') as file:
+            file.write(str(score) + "\n")
+    except:
+        pass
+
+def remove_intermediate():
+    to_remove = [
+        # "GMHI2.txt",
+        "QC_1P.fastq.gz",
+        "QC_1U.fastq.gz",
+        "QC_2P.fastq.gz",
+        "QC_2U.fastq.gz",
+        # "SRR6468520.srarp_1.fastq",
+        # "SRR6468520.srarp_2.fastq",
+        "abundance.txt",
+        "adapter1.txt",
+        "adapter2.txt",
+        "adapters.txt",
+        "bowtieout.bowtie2.bz2",
+        "garbage",
+        "human.bam",
+        "human1.fastq",
+        "human2.fastq",
+        "human_sorted.bam",
+        "in1.fastq",
+        "in2.fastq",
+        "mapped.bam",
+        "mapped.sam",
+        "merged.txt",
+        "metaphlan3.txt",
+        "repaired1.fastq",
+        "repaired1_fastqc",
+        "repaired1_fastqc.html",
+        "repaired1_fastqc.zip",
+        "repaired2.fastq",
+        "repaired2_fastqc",
+        "repaired2_fastqc.html",
+        "repaired2_fastqc.zip",
+        # "test.ipynb",
+        # "test.py",
+    ]
+    cmd = ["rm"] + to_remove
+    subprocess.call(cmd)
+
 
 def run(args):
 
@@ -155,4 +202,5 @@ def run(args):
     # remove_human()
     # remove_adapters_and_crap_reads()
     # profile_metagenome()
-    health_index()
+    # health_index(args)
+    remove_intermediate()

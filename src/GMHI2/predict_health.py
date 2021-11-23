@@ -1,4 +1,5 @@
 import pandas as pd
+import warnings
 from joblib import load
 import numpy as np
 from . import utils
@@ -28,8 +29,9 @@ def preprocess(cleaned):
     return transformed
 
 def get_score():
+    warnings.filterwarnings("ignore")
     cleaned = get_clean_matrix()
     preprocessed = preprocess(cleaned)
     clf = load(os.path.join(utils.DEFAULT_DB_FOLDER, "logreg.joblib"))
-    gmhi_score = clf.decision_function(preprocessed)
+    gmhi_score = clf.decision_function(preprocessed)[0]
     return gmhi_score
