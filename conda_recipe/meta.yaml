@@ -1,4 +1,4 @@
-{% set name = "test_gmhi2" %}
+{% set name = "gmhi2" %}
 {% set version = "1.0" %}
 
 package:
