@@ -1,10 +1,12 @@
 # GMHI2: Gut Microbiome Health Index 2
 
+<!--
 [![Anaconda-Server Badge](https://anaconda.org/danielchang2002/gmhi2/badges/version.svg)](https://anaconda.org/danielchang2002/gmhi2)
 [![Anaconda-Server Badge](https://anaconda.org/danielchang2002/gmhi2/badges/platforms.svg)](https://anaconda.org/danielchang2002/gmhi2)
 [![Anaconda-Server Badge](https://anaconda.org/danielchang2002/gmhi2/badges/license.svg)](https://anaconda.org/danielchang2002/gmhi2)
 [![Anaconda-Server Badge](https://anaconda.org/danielchang2002/gmhi2/badges/downloads.svg)](https://anaconda.org/danielchang2002/gmhi2)
 [![Anaconda-Server Badge](https://anaconda.org/danielchang2002/gmhi2/badges/installer/conda.svg)](https://conda.anaconda.org/danielchang2002)
+-->
 
 
 ### Description
