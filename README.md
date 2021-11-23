@@ -7,7 +7,6 @@
 [![Anaconda-Server Badge](https://anaconda.org/danielchang2002/gmhi2/badges/installer/conda.svg)](https://conda.anaconda.org/danielchang2002)
 
 
-
 ### Description
 Gut Microbiome Health Index 2 (GMHI2) is a robust index for evaluating 
 health status based on the species-level taxonomic profile of a stool 
