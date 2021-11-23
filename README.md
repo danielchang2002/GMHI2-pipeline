@@ -11,6 +11,11 @@ install gmhi2
 conda create --name gmhi2_env -c danielchang2002 python=3.7 gmhi2
 ```
 
+2. Activate environment
+```sh
+conda activate gmhi2_env
+```
+
 ### Usage
 ```sh
 usage: gmhi2 [-h] [-o OUTPUT] --fastq1 FASTQ1 --fastq2 FASTQ2
@@ -37,3 +42,34 @@ required named arguments:
   --fastq1 FASTQ1       first input fastq file
   --fastq2 FASTQ2       second input fastq file
 ```
+
+### Example
+Directory structure:
+```sh
+.
+├── metagenome1.fastq
+└── metagenome2.fastq
+```
+
+Command:
+```sh
+$ gmhi2 --fastq1 metagenome1.fastq --fastq2 metagenome2.fastq -o GMHI2.txt
+```
+
+Result:
+```sh
+.
+├── GMHI2.txt
+├── abundance.txt
+├── metagenome1.fastq
+└── metagenome2.fastq
+```
+Where GMHI2.txt is a text file with a single line containing the health index
+score of the metagenome, and abundance.txt is a tsv containing the estimated
+microbial abundances.
+
+
+
+
+
+
