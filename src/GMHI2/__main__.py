@@ -26,7 +26,7 @@ def main():
         formatter_class=RawTextHelpFormatter,
     )
 
-    parser.add_argument("-o", "--output", help="Output file name", default="stdout")
+    # parser.add_argument("-o", "--output", help="Output file name", default="stdout")
     requiredNamed = parser.add_argument_group("required named arguments")
     requiredNamed.add_argument(
         "--fastq1", required=True, help="first input fastq file", type=str

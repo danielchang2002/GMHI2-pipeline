@@ -1,6 +1,8 @@
 import subprocess
+import pandas as pd
 import os
 from . import utils
+from . import predict_health
 
 
 def repair():
@@ -116,24 +118,26 @@ def remove_adapters_and_crap_reads():
 
 def profile_metagenome():
     print("Profiling metagenome")
-    # database_dir = os.path.join(utils.DEFAULT_DB_FOLDER, "clade_markers")
-    # cmd = [
-    #     "metaphlan",
-    #     "QC_1P.fastq.gz,QC_2P.fastq.gz",
-    #     "--bowtie2db", database_dir,
-    #     "--bowtie2out", "bowtieout.bowtie2.bz2", 
-    #     "--index", "mpa_v30_CHOCOPhlAn_201901",
-    #     "--nproc", "16", "--input_type", "fastq", 
-    #     "-o", "metaphlan3.txt", "--add_viruses", "--unknown_estimation"
-    # ]
-    # subprocess.call(cmd)
+    database_dir = os.path.join(utils.DEFAULT_DB_FOLDER, "clade_markers")
+    cmd = [
+        "metaphlan",
+        "QC_1P.fastq.gz,QC_2P.fastq.gz",
+        "--bowtie2db", database_dir,
+        "--bowtie2out", "bowtieout.bowtie2.bz2", 
+        "--index", "mpa_v30_CHOCOPhlAn_201901",
+        "--nproc", "16", "--input_type", "fastq", 
+        "-o", "metaphlan3.txt", "--add_viruses", "--unknown_estimation"
+    ]
+    subprocess.call(cmd)
     subprocess.call([
         "merge_metaphlan_tables.py", "metaphlan3.txt", "-o", "merged.txt"
     ])
     path = os.path.join(utils.DEFAULT_DB_FOLDER, "species_only.sh")
     subprocess.call([path])
 
-
+def health_index():
+    score = predict_health.score()
+    print("GMHI2 score:", score)
 
 def run(args):
 
@@ -150,4 +154,5 @@ def run(args):
     # extract_adapters()
     # remove_human()
     # remove_adapters_and_crap_reads()
-    profile_metagenome()
+    # profile_metagenome()
+    health_index()

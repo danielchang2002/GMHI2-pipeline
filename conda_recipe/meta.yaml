@@ -21,6 +21,7 @@ requirements:
     - bedtools=2.27.1
     - trimmomatic=0.39
     - metaphlan=3.0.13
+    - scikit-learn=1.0.1
 
 test:
   imports:
