@@ -193,14 +193,14 @@ def run(args):
     # print("Inputs:", in1, in2)
 
     # make a copy of input files with simpler name
-    subprocess.call(["cp", in1, "in1.fastq"])
-    subprocess.call(["cp", in2, "in2.fastq"])
+    # subprocess.call(["cp", in1, "in1.fastq"])
+    # subprocess.call(["cp", in2, "in2.fastq"])
 
-    repair()
-    quality_control()
-    extract_adapters()
-    remove_human()
-    remove_adapters_and_crap_reads()
-    profile_metagenome()
+    # repair()
+    # quality_control()
+    # extract_adapters()
+    # remove_human()
+    # remove_adapters_and_crap_reads()
+    # profile_metagenome()
     health_index(args)
-    remove_intermediate()
+    # remove_intermediate()

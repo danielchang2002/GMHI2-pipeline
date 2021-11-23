@@ -12,7 +12,10 @@ def get_clean_matrix():
 
 
     clf = load(os.path.join(utils.DEFAULT_DB_FOLDER, "logreg.joblib"))
-    names = [name[3:] for name in clf.feature_names_in_]
+    # names = [name[3:] for name in clf.feature_names_in_]
+    names = list(clf.feature_names_in_)
+    # print(names)
+    # print(df.columns)
 
     set_diff = set(names) - set(df.columns)
 
@@ -31,7 +34,9 @@ def preprocess(cleaned):
 def get_score():
     warnings.filterwarnings("ignore")
     cleaned = get_clean_matrix()
+    print(cleaned)
     preprocessed = preprocess(cleaned)
+    print(preprocessed)
     clf = load(os.path.join(utils.DEFAULT_DB_FOLDER, "logreg.joblib"))
     gmhi_score = clf.decision_function(preprocessed)[0]
     return gmhi_score
