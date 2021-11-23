@@ -145,8 +145,8 @@ def check_clade_markers():
 def check_and_install_databases():
     print("-" * 5, "Database checks and/or installation", "-" * 5)
     g_good = check_GRCh38_noalt_as()
-    # if not g_good:
-    #     install_databases.install_GRCh38_noalt_as()
-    #     check_GRCh38_noalt_as()
-    # check_clade_markers()
+    if not g_good:
+        install_databases.install_GRCh38_noalt_as()
+        check_GRCh38_noalt_as()
+    check_clade_markers()
     print("-" * 5, "Database checks done", "-" * 5, "\n")
