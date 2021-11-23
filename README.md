@@ -1,7 +1,8 @@
 # GMHI2: Gut Microbiome Health Index 2
 
-### DESCRIPTION:
+### Description
 GMHI2 version 1.0
+
 Gut Microbiome Health Index 2 (GMHI2) is a robust index for evaluating 
 health status based on the species-level taxonomic profile of a stool 
 shotgun metagenome (gut microbiome) sample.
