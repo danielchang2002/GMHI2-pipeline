@@ -34,9 +34,9 @@ def preprocess(cleaned):
 def get_score():
     warnings.filterwarnings("ignore")
     cleaned = get_clean_matrix()
-    print(cleaned)
+    # print(cleaned)
     preprocessed = preprocess(cleaned)
-    print(preprocessed)
+    # print(preprocessed)
     clf = load(os.path.join(utils.DEFAULT_DB_FOLDER, "logreg.joblib"))
     gmhi_score = clf.decision_function(preprocessed)[0]
     return gmhi_score
