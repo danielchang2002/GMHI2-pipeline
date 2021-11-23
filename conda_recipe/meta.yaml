@@ -1,8 +1,8 @@
-{% set name = "test_GMHI2" %}
+{% set name = "test_gmhi2" %}
 {% set version = "1.0" %}
 
 package:
-  name: "{{ name|lower }}"
+  name: "{{ name }}"
   version: "{{ version }}"
 
 source:
