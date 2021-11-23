@@ -29,7 +29,7 @@ version_dict = {
     "repair.sh": "38.90",
     "fastqc": "0.11.8",
     "bowtie2": "2.4.4",
-    "samtools": "1.9",
+    "samtools": "1.14",
     "bedtools": "2.27.1",
     "trimmomatic": "0.39",
     "metaphlan": "3.0.13",
@@ -148,5 +148,5 @@ def check_and_install_databases():
     # if not g_good:
     #     install_databases.install_GRCh38_noalt_as()
     #     check_GRCh38_noalt_as()
-    # check_clade_markers()
+    check_clade_markers()
     print("-" * 5, "Database checks done", "-" * 5, "\n")

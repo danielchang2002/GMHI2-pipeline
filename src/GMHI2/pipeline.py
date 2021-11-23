@@ -1,5 +1,6 @@
 import subprocess
 import os
+from . import utils
 
 
 def repair():
@@ -29,17 +30,116 @@ def quality_control():
 
 
 def extract_adapters():
-    pass
+    print("extracting adapter sequences")
+    path = os.path.join(utils.DEFAULT_DB_FOLDER, "extract_adapter.sh")
+    subprocess.call([path])
+
+
+def remove_human():
+    print("Removing human contaminants")
+    subprocess.call(
+        [
+            "bowtie2",
+            "-p",
+            "16",
+            "-x",
+            os.path.join(utils.DEFAULT_DB_FOLDER, "GRCh38_noalt_as", "GRCh38_noalt_as"),
+            "-1",
+            "repaired1.fastq",
+            "-2",
+            "repaired2.fastq",
+            "-S",
+            "mapped.sam",
+        ]
+    )
+
+    my_cmd = ["samtools", "view", "-bS", "mapped.sam"]
+    with open("mapped.bam", "w") as outfile:
+        subprocess.call(my_cmd, stdout=outfile)
+
+    my_cmd = ["samtools", "view", "-b", "-f", "12", "-F", "256", "mapped.bam"]
+    with open("human.bam", "w") as outfile:
+        subprocess.call(my_cmd, stdout=outfile)
+
+    my_cmd = [
+        "samtools",
+        "sort",
+        "-n",
+        "human.bam",
+        "-o",
+        "human_sorted.bam",
+        "--threads",
+        "16",
+    ]
+    subprocess.call(my_cmd)
+
+    my_cmd = [
+        "bedtools",
+        "bamtofastq",
+        "-i",
+        "human_sorted.bam",
+        "-fq",
+        "human1.fastq",
+        "-fq2",
+        "human2.fastq",
+    ]
+    subprocess.call(my_cmd)
+
+
+def remove_adapters_and_crap_reads():
+    print("Removing adapter sequences and low quality reads")
+
+    cmd = [
+        "cat",
+        "adapter1.txt",
+        "adapter2.txt",
+        os.path.join(utils.DEFAULT_DB_FOLDER, "TruSeq3-PE.fa"),
+    ]
+    with open("adapters.txt", "w") as outfile:
+        subprocess.call(cmd, stdout=outfile)
+
+    cmd = [
+        "trimmomatic",
+        "PE",
+        "-threads",
+        "16",
+        "human1.fastq",
+        "human2.fastq",
+        "-baseout",
+        "QC.fastq.gz",
+        "ILLUMINACLIP:adapters.txt:2:30:10:2:keepBothReads",
+        "LEADING:3",
+        "TRAILING:3",
+        "MINLEN:60",
+    ]
+    subprocess.call(cmd)
+
+def profile_metagenome():
+    print("Profiling metagenome")
+    # database_dir = os.path.join(utils.DEFAULT_DB_FOLDER, "clade_markers")
+    # cmd = [
+    #     "metaphlan",
+    #     "QC_1P.fastq.gz,QC_2P.fastq.gz",
+    #     "--bowtie2db", database_dir,
+    #     "--bowtie2out", "bowtieout.bowtie2.bz2", 
+    #     "--index", "mpa_v30_CHOCOPhlAn_201901",
+    #     "--nproc", "16", "--input_type", "fastq", 
+    #     "-o", "metaphlan3.txt", "--add_viruses", "--unknown_estimation"
+    # ]
+    # subprocess.call(cmd)
+    subprocess.call([
+        "merge_metaphlan_tables.py", "metaphlan3.txt", "-o", "merged.txt"
+    ])
+    path = os.path.join(utils.DEFAULT_DB_FOLDER, "species_only.sh")
+    subprocess.call([path])
+
 
 
 def run(args):
 
     # read inputs
     in1, in2 = args.fastq1, args.fastq2
-    print("Inputs:", in1, in2)
-    if in1.split(".")[-1] != "fastq" or in2.split(".")[-1] != "fastq":
-        print("invalid file extensions")
-        return
+    # print("Inputs:", in1, in2)
 
     # make a copy of input files with simpler name
     # subprocess.call(["cp", in1, "in1.fastq"])
@@ -47,18 +147,7 @@ def run(args):
 
     # repair()
     # quality_control()
-    extract_adapters()
-
-    return
-
-    # check qualities of sequences
-    print("quality control of sequences")
-
-    # subprocess.call(["fastqc", out1])
-    # subprocess.call(["fastqc", out2])
-
-    zipout1 = "_".join(out1.rsplit(".", 1)) + "c"
-    zipout2 = "_".join(out2.rsplit(".", 1)) + "c"
-
-    # subprocess.call(["unzip", zipout1])
-    # subprocess.call(["unzip", zipout2])
+    # extract_adapters()
+    # remove_human()
+    # remove_adapters_and_crap_reads()
+    profile_metagenome()
