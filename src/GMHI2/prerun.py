@@ -122,7 +122,7 @@ def check_GRCh38_noalt_as():
     print_check_message(correct)
     if not correct:
         print(
-            bcolors.WARNING, database, "database not found or corrupted", bcolors.ENDC
+            bcolors.WARNING + database, "database not found or corrupted", bcolors.ENDC
         )
     return correct
 
@@ -144,9 +144,9 @@ def check_clade_markers():
 
 def check_and_install_databases():
     print("-" * 5, "Database checks and/or installation", "-" * 5)
-    # if not check_GRCh38_noalt_as():
+    g_good = check_GRCh38_noalt_as()
+    # if not g_good:
     #     install_databases.install_GRCh38_noalt_as()
-    # check_GRCh38_noalt_as()
-    check_GRCh38_noalt_as()
+    #     check_GRCh38_noalt_as()
     # check_clade_markers()
     print("-" * 5, "Database checks done", "-" * 5, "\n")
