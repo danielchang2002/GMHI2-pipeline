@@ -8,7 +8,7 @@ install gmhi2
 
 1. Install via conda
 ```sh
-conda create --name mpa -c danielchang2002 python=3.7 gmhi2
+conda create --name gmhi2_env -c danielchang2002 python=3.7 gmhi2
 ```
 
 ### Usage
