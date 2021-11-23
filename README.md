@@ -1,8 +1,11 @@
 # GMHI2: Gut Microbiome Health Index 2
+[![Forks][forks-shield]][https://github.com/danielchang2002/GMHI2/network/members]
+[![Stargazers][stars-shield]][https://github.com/danielchang2002/GMHI2/stargazers]
+[![Issues][issues-shield]][https://github.com/danielchang2002/GMHI2/issues]
+[![MIT License][license-shield]][https://github.com/danielchang2002/GMHI2/blob/main/LICENSE]
+[![LinkedIn][linkedin-shield]][ihttps://www.linkedin.com/in/daniel-chang-b93473204]
 
 ### Description
-GMHI2 version 1.0
-
 Gut Microbiome Health Index 2 (GMHI2) is a robust index for evaluating 
 health status based on the species-level taxonomic profile of a stool 
 shotgun metagenome (gut microbiome) sample.
