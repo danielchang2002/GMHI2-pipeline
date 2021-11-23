@@ -1,9 +1,12 @@
 # GMHI2: Gut Microbiome Health Index 2
-[![Forks][forks-shield]][https://github.com/danielchang2002/GMHI2/network/members]
-[![Stargazers][stars-shield]][https://github.com/danielchang2002/GMHI2/stargazers]
-[![Issues][issues-shield]][https://github.com/danielchang2002/GMHI2/issues]
-[![MIT License][license-shield]][https://github.com/danielchang2002/GMHI2/blob/main/LICENSE]
-[![LinkedIn][linkedin-shield]][ihttps://www.linkedin.com/in/daniel-chang-b93473204]
+
+[![Forks][forks-shield]][forks-url]
+[![Stargazers][stars-shield]][stars-url]
+[![Issues][issues-shield]][issues-url]
+[![MIT License][license-shield]][license-url]
+[![LinkedIn][linkedin-shield]][linkedin-url]
+
+
 
 ### Description
 Gut Microbiome Health Index 2 (GMHI2) is a robust index for evaluating 
@@ -86,13 +89,13 @@ microbial abundances.
 [contributors-shield]: https://img.shields.io/github/contributors/github_username/repo_name.svg?style=for-the-badge
 [contributors-url]: https://github.com/github_username/repo_name/graphs/contributors
 [forks-shield]: https://img.shields.io/github/forks/github_username/repo_name.svg?style=for-the-badge
-[forks-url]: https://github.com/github_username/repo_name/network/members
+[forks-url]: https://github.com/danielchang2002/GMHI2/network/members
 [stars-shield]: https://img.shields.io/github/stars/github_username/repo_name.svg?style=for-the-badge
-[stars-url]: https://github.com/github_username/repo_name/stargazers
+[stars-url]: https://github.com/danielchang2002/GMHI2/stargazers
 [issues-shield]: https://img.shields.io/github/issues/github_username/repo_name.svg?style=for-the-badge
-[issues-url]: https://github.com/github_username/repo_name/issues
+[issues-url]: https://github.com/danielchang2002/GMHI2/issues
 [license-shield]: https://img.shields.io/github/license/github_username/repo_name.svg?style=for-the-badge
-[license-url]: https://github.com/github_username/repo_name/blob/master/LICENSE.txt
+[license-url]: https://github.com/danielchang2002/GMHI2/blob/main/LICENSE
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
-[linkedin-url]: https://linkedin.com/in/linkedin_username
+[linkedin-url]: https://www.linkedin.com/in/daniel-chang-b93473204/
 [product-screenshot]: images/screenshot.png
