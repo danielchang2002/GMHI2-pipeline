@@ -87,9 +87,12 @@ microbial abundances.
 
 ### Runtime
 
-On a 2019 MacBook Pro with a 2.3 GHz 8-Core Intel Core i9 processor and 
-16GB of RAM, a single run of gmhi2 takes 29 minutes.
+Runtime depends on the size of the input metagenome and the system specs.
 
-Note: the initial run on any machine will take around twice as long
+On a 2019 MacBook Pro with a 2.3 GHz 8-Core Intel Core i9 processor and 
+16GB of RAM, a single run of gmhi2 on an input metagenome 
+of 4 GB takes 29 minutes.
+
+Note: the initial run on any machine will take extra time
 because databases will need to be downloaded and installed before the actual
 computation.
