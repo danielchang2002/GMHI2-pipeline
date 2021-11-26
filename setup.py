@@ -4,11 +4,11 @@ with open("README.md", "r", encoding="utf-8") as fh:
     long_description = fh.read()
 
 setuptools.setup(
-    name="testing1234-GMHI2",
+    name="gmhi2-package",
     version="0.0.1",
     author="Daniel Chang",
     author_email="danielchang2002@gmail.com",
-    description="A small example package",
+    description="Gut Microbiome Health Index 2",
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/pypa/sampleproject",

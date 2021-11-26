@@ -85,3 +85,11 @@ where GMHI2.txt is a text file with a single line containing the health index
 score of the metagenome, and abundance.txt is a tsv containing the estimated
 microbial abundances.
 
+### Runtime
+
+On a 2019 MacBook Pro with a 2.3 GHz 8-Core Intel Core i9 processor and 
+16GB of RAM, a single run of gmhi2 takes 29 minutes.
+
+Note: the initial run on any machine will take around twice as long
+because databases will need to be downloaded and installed before the actual
+computation.
